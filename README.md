@@ -12,7 +12,7 @@ mode: "jit", // tailwind CSS의 실험적인 기능 중 하나인 JIT(Just-In-Ti
 darkMode: false, // or 'media' or 'class'
 content: [
 "./src/**/*.{js,jsx,ts,tsx}",
- ],
+],
 theme: {
 extend: {},
 },
