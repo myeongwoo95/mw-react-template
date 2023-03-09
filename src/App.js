@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Index from "./pages/Index";
-import Board from "./pages/Board";
+import Board from "./pages/board/Board";
 
 function App() {
   return (
