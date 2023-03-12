@@ -5,7 +5,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 
 const BoardWrite = () => {
   return (
-    <div className=" flex flex-col mx-auto max-w-7xl p-6">
+    <div className="flex flex-col mx-auto max-w-7xl p-6">
       <Editor
         placeholder="내용을 입력해주세요."
         previewStyle="vertical" // 미리보기 스타일 지정

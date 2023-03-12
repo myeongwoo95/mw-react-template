@@ -157,9 +157,23 @@ const Header = () => {
           <Link to="/BoardList">일반 게시판</Link>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          <Link to="SignIn" class="mr-5">
+            <a
+              href="#"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              sign in <span aria-hidden="true">&rarr;</span>
+            </a>
+          </Link>
+
+          <Link to="SignUp">
+            <a
+              href="#"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              sign up <span aria-hidden="true">&rarr;</span>
+            </a>
+          </Link>
         </div>
       </nav>
       <Dialog

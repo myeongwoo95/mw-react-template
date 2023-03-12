@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const BoardList = () => {
   return (
-    <div className=" flex flex-col mx-auto max-w-7xl p-6">
+    <div className="flex flex-col mx-auto max-w-7xl p-6">
       <div className="overflow-x-auto">
         <div className="p-1.5 w-full inline-block align-middle">
           <div className="overflow-hidden border rounded-lg">
