@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { testApi } from "./../../service/signService";
 
 const SignUp = () => {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -20,7 +21,7 @@ const SignUp = () => {
     });
   };
 
-  const signUphandler = () => {
+  const signUphandler = async () => {
     if (isDisabled) return;
     setIsDisabled(true);
     setTimeout(() => {
@@ -57,14 +58,10 @@ const SignUp = () => {
       password: password,
     };
 
-    // axios
-    //   .get("/api/hello")
-    //   .then((response) => {
-    //     console.log(response); // 성공한 경우, response.data에 응답 데이터가 담겨 있음
-    //   })
-    //   .catch((error) => {
-    //     console.error(error); // 실패한 경우, error에 실패 이유가 담겨 있음
-    //   });
+    const response = await testApi.hello();
+    console.log(response.data);
+
+    //일반 axios로 사용해보셈, 만약 setupProxy가 적용됫다면 서버측에서 cors 설정 3000번대를 5000대로 바꿔도 되야 내 생각이 맞음(일단 서버는 3000포트는 허용시켜줫는데 랜덤포트 (5000으로 바꿔주셈))
   };
 
   const handleKeyDown = (e) => {
