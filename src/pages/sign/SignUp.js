@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 const SignUp = () => {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -58,14 +57,14 @@ const SignUp = () => {
       password: password,
     };
 
-    axios
-      .get("/api/hello")
-      .then((response) => {
-        console.log(response); // 성공한 경우, response.data에 응답 데이터가 담겨 있음
-      })
-      .catch((error) => {
-        console.error(error); // 실패한 경우, error에 실패 이유가 담겨 있음
-      });
+    // axios
+    //   .get("/api/hello")
+    //   .then((response) => {
+    //     console.log(response); // 성공한 경우, response.data에 응답 데이터가 담겨 있음
+    //   })
+    //   .catch((error) => {
+    //     console.error(error); // 실패한 경우, error에 실패 이유가 담겨 있음
+    //   });
   };
 
   const handleKeyDown = (e) => {
