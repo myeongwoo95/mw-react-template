@@ -69,7 +69,7 @@ const Header = () => {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <Link to="/">
+          <Link to="LandingPage">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
@@ -153,7 +153,7 @@ const Header = () => {
               </Popover.Panel>
             </Transition>
           </Popover>
-          <Link to="/">홈</Link>
+          <Link to="/LandingPage">홈</Link>
           <Link to="/BoardList">일반 게시판</Link>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
