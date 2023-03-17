@@ -1,6 +1,14 @@
 import React from "react";
+import { routes } from "./../../App";
 
 const Footer = () => {
+  // 특정 url에서 footer가 보이지않게 하기
+  if (window.location.pathname === "") return null;
+
+  // 등록되지 않은 url이라면 footer가 보이지않게 하기
+  // if (!routes.find((route) => route.path === window.location.pathname))
+  //   return null;
+
   return (
     <footer>
       <div className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">

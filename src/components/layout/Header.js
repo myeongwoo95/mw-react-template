@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { routes } from "./../../App";
 
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
@@ -62,6 +63,13 @@ function classNames(...classes) {
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // 특정 url에서 header 보이지않게 하기
+  if (window.location.pathname === "") return null;
+
+  // 등록되지 않은 url이라면 footer가 보이지않게 하기
+  // if (!routes.find((route) => route.path === window.location.pathname))
+  //   return null;
+
   return (
     <header className="bg-white">
       <nav
@@ -69,7 +77,7 @@ const Header = () => {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <Link to="LandingPage">
+          <Link to="/">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
@@ -153,7 +161,7 @@ const Header = () => {
               </Popover.Panel>
             </Transition>
           </Popover>
-          <Link to="/LandingPage">홈</Link>
+          <Link to="/">홈</Link>
           <Link to="/BoardList">일반 게시판</Link>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">

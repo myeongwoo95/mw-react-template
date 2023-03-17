@@ -8,6 +8,7 @@ const api = axios.create({
   },
 });
 
+// axios request 인터셉터
 api.interceptors.request.use(
   (config) => {
     console.log("토큰없어서 아무것도 안함");
@@ -24,6 +25,7 @@ api.interceptors.request.use(
   }
 );
 
+// axios response 인터셉터
 api.interceptors.response.use(
   (config) => {
     console.log("응답테스트");
