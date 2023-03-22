@@ -80,7 +80,7 @@ const SignUp = () => {
       .signUp(data)
       .then((response) => {
         alert("회원가입을 축하드립니다.");
-        navigate("/");
+        navigate("/SignIn");
       })
       .catch((error) => {
         alert(error.response.data.message);

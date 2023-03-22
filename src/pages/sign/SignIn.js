@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { authApi } from "./../../service/authService";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+
   const [isDisabled, setIsDisabled] = useState(false);
   const DISABLE_TIME = 1500; // 버튼 비활성화 시간(ms)
 
@@ -21,7 +25,16 @@ const SignIn = () => {
     });
   };
 
-  const loginHandler = () => {
+  const loginHandler = async (e) => {
+    e.preventDefault();
+
+    // 연속클릭방지
+    if (isDisabled) return;
+    setIsDisabled(true);
+    setTimeout(() => {
+      setIsDisabled(false);
+    }, DISABLE_TIME);
+
     if (username === null || username === "" || username === undefined) {
       alert("username을 입력해주세요.");
       return;
@@ -32,13 +45,22 @@ const SignIn = () => {
       return;
     }
 
-    alert("로그인 진행");
-  };
+    const data = {
+      username: username,
+      password: password,
+    };
 
-  const handleKeyDown = (e) => {
-    if (e.key == "Enter") {
-      loginHandler();
-    }
+    await authApi
+      .signIn(data)
+      .then((response) => {
+        console.log(response);
+        alert("성공적으로 로그인되었습니다.");
+        // navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error.response.data.message);
+      });
   };
 
   return (
@@ -59,43 +81,43 @@ const SignIn = () => {
             <h2 class="text-gray-900 text-lg font-medium title-font mb-5">
               Sign In
             </h2>
-            <div class="relative mb-4">
-              <label for="username" class="leading-7 text-sm text-gray-600">
-                username
-              </label>
-              <input
-                placeholder="username"
-                onKeyUp={handleKeyDown}
-                onChange={onChange}
-                value={username}
-                type="text"
-                id="username"
-                name="username"
-                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <div class="relative mb-4">
-              <label for="password" class="leading-7 text-sm text-gray-600">
-                password
-              </label>
-              <input
-                placeholder="password"
-                onKeyUp={handleKeyDown}
-                onChange={onChange}
-                value={password}
-                type="password"
-                id="password"
-                name="password"
-                class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              />
-            </div>
-            <button
-              class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-              onClick={loginHandler}
-              disabled={isDisabled}
-            >
-              로그인
-            </button>
+            <form onSubmit={loginHandler}>
+              <div class="relative mb-4">
+                <label for="username" class="leading-7 text-sm text-gray-600">
+                  username
+                </label>
+                <input
+                  placeholder="username"
+                  onChange={onChange}
+                  value={username}
+                  type="text"
+                  id="username"
+                  name="username"
+                  class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                />
+              </div>
+              <div class="relative mb-4">
+                <label for="password" class="leading-7 text-sm text-gray-600">
+                  password
+                </label>
+                <input
+                  placeholder="password"
+                  onChange={onChange}
+                  value={password}
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                />
+              </div>
+              <button
+                class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full"
+                onClick={loginHandler}
+                disabled={isDisabled}
+              >
+                로그인
+              </button>
+            </form>
             <Link to="/SignUp" class="mt-3 flex justify-center">
               <a href="#" class="text-xs text-gray-500">
                 아직 회원이 아니신가요?

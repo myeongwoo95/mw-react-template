@@ -7,4 +7,10 @@ export const authApi = {
       username: data.username,
       password: data.password,
     }),
+
+  signIn: (data) =>
+    api.post("/api/v1/auth/signin", {
+      username: data.username,
+      password: data.password,
+    }),
 };
