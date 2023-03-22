@@ -79,15 +79,12 @@ const SignUp = () => {
     await authApi
       .signUp(data)
       .then((response) => {
-        setModalText("회원가입에 성공했습니다.");
-        navigate("/Page1");
+        alert("회원가입을 축하드립니다.");
+        navigate("/");
       })
       .catch((error) => {
-        setModalText(error.response.data.message);
-        navigate("/Page2");
+        alert(error.response.data.message);
       });
-
-    modalHandler();
   };
 
   return (

@@ -5,8 +5,6 @@ import BoardWrite from "./pages/board/BoardWrite";
 import SignUp from "./pages/sign/SignUp";
 import SignIn from "./pages/sign/SignIn";
 import MainPage from "./pages/MainPage";
-import Page1 from "./pages/common-pages/Page1";
-import Page2 from "./pages/common-pages/Page2";
 import NotFound from "./pages/NotFound";
 
 export const routes = [
@@ -17,9 +15,6 @@ export const routes = [
 
   { path: "/SignIn", component: SignIn },
   { path: "/SignUp", component: SignUp },
-
-  { path: "/Page1", component: Page1 },
-  { path: "/Page2", component: Page2 },
 
   { path: "*", component: NotFound },
 ];
