@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { routes } from "./../../App";
+import AuthContext from "./../../context/AuthContext";
 
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
@@ -61,6 +62,14 @@ function classNames(...classes) {
 }
 
 const Header = () => {
+  const navigate = useNavigate();
+  const { loggedUser, loggedIn, setLogout } = useContext(AuthContext);
+
+  function logout() {
+    setLogout();
+    navigate("/");
+  }
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // 특정 url에서 header 보이지않게 하기
@@ -164,25 +173,46 @@ const Header = () => {
           <Link to="/">홈</Link>
           <Link to="/BoardList">일반 게시판</Link>
         </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link to="SignIn" class="mr-5">
-            <a
-              href="#"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              sign in <span aria-hidden="true">&rarr;</span>
-            </a>
-          </Link>
+        {loggedIn ? (
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <Link to="/" class="mr-5">
+              <a
+                href="#"
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                My page({loggedUser}) <span aria-hidden="true">&rarr;</span>
+              </a>
+            </Link>
 
-          <Link to="SignUp">
-            <a
-              href="#"
+            <button
+              type="button"
               className="text-sm font-semibold leading-6 text-gray-900"
+              onClick={logout}
             >
-              sign up <span aria-hidden="true">&rarr;</span>
-            </a>
-          </Link>
-        </div>
+              Logout <span aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+        ) : (
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <Link to="SignIn" class="mr-5">
+              <a
+                href="#"
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                sign in <span aria-hidden="true">&rarr;</span>
+              </a>
+            </Link>
+
+            <Link to="SignUp">
+              <a
+                href="#"
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                sign up <span aria-hidden="true">&rarr;</span>
+              </a>
+            </Link>
+          </div>
+        )}
       </nav>
       <Dialog
         as="div"

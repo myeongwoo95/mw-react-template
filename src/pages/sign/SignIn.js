@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { authApi } from "./../../service/authService";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { saveToken } from "../../utils/tokenStorage";
+import AuthContext from "./../../context/AuthContext";
+import { saveSession } from "./../../utils/sessionStorage";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const { setLoggedUser, setLoggedIn } = useContext(AuthContext);
 
   const [isDisabled, setIsDisabled] = useState(false);
   const DISABLE_TIME = 1500; // 버튼 비활성화 시간(ms)
@@ -53,12 +57,15 @@ const SignIn = () => {
     await authApi
       .signIn(data)
       .then((response) => {
-        console.log(response);
+        setLoggedUser(username);
+        setLoggedIn();
+        saveSession(username);
+        saveToken(response.data.accessToken);
+
         alert("성공적으로 로그인되었습니다.");
-        // navigate("/");
+        navigate("/");
       })
       .catch((error) => {
-        console.log(error);
         alert(error.response.data.message);
       });
   };

@@ -6,6 +6,7 @@ import SignUp from "./pages/sign/SignUp";
 import SignIn from "./pages/sign/SignIn";
 import MainPage from "./pages/MainPage";
 import NotFound from "./pages/NotFound";
+import { AuthContextProvider } from "./context/AuthContext";
 
 export const routes = [
   { path: "/", component: MainPage, initial: true },
@@ -21,18 +22,20 @@ export const routes = [
 
 function App() {
   return (
-    <Layout>
-      <Routes>
-        {routes.map((route) => (
-          <Route
-            key={route.path}
-            path={route.path}
-            element={<route.component />}
-            initial={route.initial ? true : false}
-          />
-        ))}
-      </Routes>
-    </Layout>
+    <AuthContextProvider>
+      <Layout>
+        <Routes>
+          {routes.map((route) => (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={<route.component />}
+              initial={route.initial ? true : false}
+            />
+          ))}
+        </Routes>
+      </Layout>
+    </AuthContextProvider>
   );
 }
 
